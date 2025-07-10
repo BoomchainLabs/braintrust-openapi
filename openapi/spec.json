@@ -4867,6 +4867,11 @@
             },
             "description": "The list of scorers to use for online scoring"
           },
+          "btql_filter": {
+            "type": "string",
+            "nullable": true,
+            "description": "Filter logs using BTQL"
+          },
           "apply_to_root_span": {
             "type": "boolean",
             "nullable": true,
@@ -7225,6 +7230,31 @@
                     "text"
                   ]
                 }
+              },
+              "timeRangeFilter": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "from": {
+                        "type": "string"
+                      },
+                      "to": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "from",
+                      "to"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             },
             "title": "TableViewOptions"
@@ -7555,6 +7585,26 @@
                   "type": "string"
                 },
                 "description": "Emails of users to invite"
+              },
+              "service_accounts": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "token_name": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "description": "Service accounts to create"
               },
               "send_invite_emails": {
                 "type": "boolean",
